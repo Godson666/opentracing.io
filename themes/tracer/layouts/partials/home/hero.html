@@ -1,0 +1,42 @@
+{{- $languages := .Site.Data.language.array -}}
+{{- $hero := .Site.Params.hero }}
+<section class="hero landing-page">
+  <div class="hero__content">
+
+    {{ partial "home/bash-window.html" . }}
+
+    <section class="hero__copy">
+      <h1 class="bariol-thin">{{ $hero.tagline }}</h1>
+      <div class="libraries">
+        <h2 class="dark-blue">Libraries available in {{ len $languages }} languages</h2>
+        <p class="dark-blue">
+          {{- range $idx, $elem := $languages }}
+          <a href="{{ $elem.url }}">{{ $elem.name }}</a>{{ if ne (add $idx 1) (len $.Site.Data.language.array) }},{{ end }}
+          {{- end }}
+        </p>
+      </div>
+      {{- with $hero.update -}}
+      <h4>The latest from our blog:</h4>
+      <div id="update" class="update">
+        <a href="" target="_blank">
+        </a>
+        <script type="text/javascript">
+          fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2Fopentracing')
+            .then(function(res) {
+              res.json().then(function(data) {
+                let item = data.items[0];
+                let content = `<a href="${item.link}" target="_blank">${item.title}</a>`;
+                document.getElementById('update').innerHTML = content;
+              });
+            }).catch(function() {
+              let content = `<a href="https://medium.com/opentracing" target="_blank">OpenTracing on Medium</a>`
+              document.getElementById('update').innerHTML = content;
+            });
+      </script>
+      </div>
+      {{- end -}}
+    </section>
+  </div>
+
+  {{ partial "home/logo-bar.html" . }}
+</section>

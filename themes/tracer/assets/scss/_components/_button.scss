@@ -1,0 +1,59 @@
+@import '../variables';
+
+$font-size: 0.9rem;
+
+.button {
+  border-radius: 5px;
+  color: $dark-blue;
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  &:hover {
+    &:before {
+      //margin-right: 15px;
+      color: $blue-black;
+      mix-blend-mode: difference;
+      outline: none;
+      -webkit-box-shadow: inset 0px 0px 5px $blue-black;
+         -moz-box-shadow: inset 0px 0px 5px $blue-black;
+              box-shadow: inset 0px 0px 5px $blue-black;
+    }
+  }
+
+  &:before {
+    content: '->';
+    position: relative;
+    border: 5px;
+    font-size: inherit;
+    display: inline-block;
+    transition: margin 200ms;
+    padding: 0.075rem 1.25rem;
+    color: $blue-text;
+    border: 1px solid $blue-text;
+    border-radius: 0.65em;
+    margin-right: 10px;
+    line-height: 1.5rem;
+  }
+
+
+  &.white {
+    color: white;
+
+    &:before {
+      border-color: white;
+      color: white;
+    }
+  }
+
+  @media (max-width: $medium) {
+    font-weight: 600;
+    line-height: 2rem;
+
+    &:before {
+      line-height: 2rem;
+    }
+  }
+
+}
